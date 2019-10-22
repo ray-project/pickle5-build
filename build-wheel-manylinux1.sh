@@ -11,14 +11,12 @@ echo 10
 EOF
 chmod +x /usr/bin/nproc
 
-PYTHONS=("cp35-cp35m"
-         "cp36-cp36m"
+PYTHONS=("cp36-cp36m"
          "cp37-cp37m")
 
 # The minimum supported numpy version is 1.14, see
 # https://issues.apache.org/jira/browse/ARROW-3141
 NUMPY_VERSIONS=("1.14.5"
-                "1.14.5"
                 "1.14.5")
 
 # Remove this old Python 2.4.3 executable, and make the "python2" command find
