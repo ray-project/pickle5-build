@@ -1,0 +1,13 @@
+language: generic
+# Use Ubuntu 16.04
+dist: xenial
+
+matrix:
+  include:
+
+    # Build Linux wheels.
+    - os: linux
+      env: LINUX_WHEELS=1 PYTHONWARNINGS=ignore
+      install:
+        - git clone https://github.com/suquark/pickle5-backport
+        - ./ci/suppress_output docker run --rm -w /ray -v `pwd`:/pickle5-build $MOUNT_BAZEL_CACHE -ti rayproject/arrow_linux_x86_64_base:latest build-wheel-manylinux1.sh
