@@ -11,3 +11,19 @@ matrix:
       install:
         - git clone https://github.com/suquark/pickle5-backport
         - docker run --rm -w /pickle5-build -v `pwd`:/pickle5-build -ti rayproject/arrow_linux_x86_64_base:latest /pickle5-build/build-wheel-manylinux1.sh
+
+deploy:
+  provider: s3
+  access_key_id: $AWS_ACCESS_KEY_ID
+  secret_access_key:
+    secure: $AWS_SECRET_ACCESS_KEY
+  bucket: pickle-wheels
+  skip_cleanup: true
+  region: us-west-2
+  local-dir: .whl
+  upload-dir: $TRAVIS_COMMIT
+  on:
+    repo: ray-project/pickle5-build
+notifications:
+  email:
+  - pcmoritz@gmail.com
